@@ -94,6 +94,7 @@ public class Main extends Application {
         Button changeRangeButton = new Button("ChangeRange");
         Button spawnVehiclesButton = new Button("Spawn Vehicles");
         Button spawnFakedVeehicle = new Button("Spawn fake vehicle");
+        Button spawnBlackHole = new Button("Spawn black hole");
         TextField vehiclesAmountField = new TextField();
         TextField rangeAmountField = new TextField();
         Label rangeAmountLabel = new Label("Range");
@@ -230,6 +231,9 @@ public class Main extends Application {
         spawnFakedVeehicle.setLayoutX(1130.0);
         spawnFakedVeehicle.setLayoutY(110.0);
 
+        spawnBlackHole.setLayoutX(1130.0);
+        spawnBlackHole.setLayoutY(300.0);
+
         showRangeButton.setLayoutX(950.0);
         showRangeButton.setLayoutY(80.0);
 
@@ -268,6 +272,13 @@ public class Main extends Application {
 
         });
 
+        spawnBlackHole.setOnAction(e -> {
+            simulation.getMap().addFakeVehicle(chooseFakeEvent.getValue().toString());
+            shapesCreator.setVehicleCircles(simulation, 1);
+            shapesCreator.setLabels(simulation, 1);
+
+        });;
+
         spawnVehiclesButton.setOnAction(e -> {
             simulation.getMap().addVehicles(Integer.parseInt(vehiclesAmountField.getText()));
             shapesCreator.setVehicleCircles(simulation,
@@ -278,6 +289,7 @@ public class Main extends Application {
         root.getChildren()
                 .addAll(chooseFakeEvent,
                         spawnFakedVeehicle,
+                        spawnBlackHole,
                         showRangeButton,
                         spawnVehiclesButton,
                         vehiclesAmountField,
