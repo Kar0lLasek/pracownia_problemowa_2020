@@ -146,11 +146,9 @@ public class Map {
         fakeEventId--;
     }
 
-    public void addBlackholeAttack(String nameEvent) {
+    public void addBlackHoleAttack(String nameEvent) {
         Random random = new Random();
-        int x = (int) (random.nextDouble() * 1000);
-        int y = (int) (random.nextDouble() * 1000);
-        Vehicle vehicle = new Vehicle(routes.get(99 % 5), fakeCarId, 40.0,
+        Vehicle vehicle = new Vehicle(routes.get(99 % 5), fakeCarId, 200.0,
                 random.nextDouble() / 2.0 + 2);
         vehicle.setBlackHole(true);
         vehicles.add(vehicle);

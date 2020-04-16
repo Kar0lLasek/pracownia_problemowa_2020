@@ -116,6 +116,11 @@ public class Vehicle extends NetworkPoint {
                         flag = true;
                     }
                 }
+                for (Event outEventBH : connectedVehicle.getNotCollectedEventsBH()) {
+                    if (event.getId() == outEventBH.getId()) {
+                        flag = true;
+                    }
+                }
 
                 if (!flag && this.trustLevel >= 0.5) {
                     if(!this.blackHole) {
@@ -127,15 +132,15 @@ public class Vehicle extends NetworkPoint {
                         System.out.println("[" + timeStamp + "] Event " + event.getId() + " shared "
                                 + "from Vehicle " + this
                                 .getId() + " to Vehicle " + connectedVehicle.getId());
-                    } else if(this.blackHole) {
-                        connectedVehicle.getCollectedEvents().add(event);
+                    } else {
+                        connectedVehicle.getNotCollectedEventsBH().add(event);
                         Timestamp timeStamp = new Timestamp(System.currentTimeMillis());
                         Logger.log("[" + timeStamp + "] Event " + event.getId() + " NOT shared from "
                                 + "Vehicle " + this
-                                .getId() + " to Vehicle " + connectedVehicle.getId());
+                                .getId() + " to Vehicle " + connectedVehicle.getId() + ". BLACK HOLE.");
                         System.out.println("[" + timeStamp + "] Event " + event.getId() + " NOT shared "
                                 + "from Vehicle " + this
-                                .getId() + " to Vehicle " + connectedVehicle.getId());
+                                .getId() + " to Vehicle " + connectedVehicle.getId() + ". BLACK HOLE.");
                     }
                 }
             }
@@ -146,6 +151,11 @@ public class Vehicle extends NetworkPoint {
                 flag = false;
                 for (Event outEvent : connectedPoint.getCollectedEvents()) {
                     if (event.getId() == outEvent.getId()) {
+                        flag = true;
+                    }
+                }
+                for (Event outEventBH : connectedPoint.getNotCollectedEventsBH()) {
+                    if (event.getId() == outEventBH.getId()) {
                         flag = true;
                     }
                 }
@@ -160,15 +170,15 @@ public class Vehicle extends NetworkPoint {
                         System.out.println("[" + timeStamp + "] Event " + event.getId() + " shared "
                                 + "from Vehicle " + this
                                 .getId() + " to Stationary");
-                    } else if(this.blackHole) {
+                    } else {
                         connectedPoint.getCollectedEvents().add(event);
                         Timestamp timeStamp = new Timestamp(System.currentTimeMillis());
                         Logger.log("[" + timeStamp + "] Event " + event.getId() + " NOT shared from "
                                 + "Vehicle " + this
-                                .getId() + " to Stationary");
+                                .getId() + " to Stationary. BLACK HOLE.");
                         System.out.println("[" + timeStamp + "] Event " + event.getId() + " NOT shared "
                                 + "from Vehicle " + this
-                                .getId() + " to Stationary");
+                                .getId() + " to Stationary. BLACK HOLE.");
                     }
                 }
             }
@@ -231,4 +241,3 @@ public class Vehicle extends NetworkPoint {
         return "ID:\t" + id + '\t' + "safe: " + safe;
     }
 }
-    
