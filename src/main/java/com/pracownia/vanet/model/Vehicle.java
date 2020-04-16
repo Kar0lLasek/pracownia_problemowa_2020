@@ -171,7 +171,7 @@ public class Vehicle extends NetworkPoint {
                                 + "from Vehicle " + this
                                 .getId() + " to Stationary");
                     } else {
-                        connectedPoint.getCollectedEvents().add(event);
+                        connectedPoint.getNotCollectedEventsBH().add(event);
                         Timestamp timeStamp = new Timestamp(System.currentTimeMillis());
                         Logger.log("[" + timeStamp + "] Event " + event.getId() + " NOT shared from "
                                 + "Vehicle " + this
