@@ -36,6 +36,7 @@ public class Vehicle extends NetworkPoint {
     @Setter(AccessLevel.NONE)
     private Point previousCrossing;
     private boolean safe = true;
+    private boolean blackHole = false;
 
     /*------------------------ METHODS REGION ------------------------*/
     public Vehicle() {
@@ -117,14 +118,24 @@ public class Vehicle extends NetworkPoint {
                 }
 
                 if (!flag && this.trustLevel >= 0.5) {
-                    connectedVehicle.getCollectedEvents().add(event);
-                    Timestamp timeStamp = new Timestamp(System.currentTimeMillis());
-                    Logger.log("[" + timeStamp + "] Event " + event.getId() + " shared from "
-                            + "Vehicle " + this
-                            .getId() + " to Vehicle " + connectedVehicle.getId());
-                    System.out.println("[" + timeStamp + "] Event " + event.getId() + " shared "
-                            + "from Vehicle " + this
-                            .getId() + " to Vehicle " + connectedVehicle.getId());
+                    if(!this.blackHole) {
+                        connectedVehicle.getCollectedEvents().add(event);
+                        Timestamp timeStamp = new Timestamp(System.currentTimeMillis());
+                        Logger.log("[" + timeStamp + "] Event " + event.getId() + " shared from "
+                                + "Vehicle " + this
+                                .getId() + " to Vehicle " + connectedVehicle.getId());
+                        System.out.println("[" + timeStamp + "] Event " + event.getId() + " shared "
+                                + "from Vehicle " + this
+                                .getId() + " to Vehicle " + connectedVehicle.getId());
+                    } else if(this.blackHole) {
+                        Timestamp timeStamp = new Timestamp(System.currentTimeMillis());
+                        Logger.log("[" + timeStamp + "] Event " + event.getId() + " NOT shared from "
+                                + "Vehicle " + this
+                                .getId() + " to Vehicle " + connectedVehicle.getId());
+                        System.out.println("[" + timeStamp + "] Event " + event.getId() + " NOT shared "
+                                + "from Vehicle " + this
+                                .getId() + " to Vehicle " + connectedVehicle.getId());
+                    }
                 }
             }
         }
@@ -139,14 +150,24 @@ public class Vehicle extends NetworkPoint {
                 }
 
                 if (!flag && this.trustLevel >= 0.5) {
-                    connectedPoint.getCollectedEvents().add(event);
-                    Timestamp timeStamp = new Timestamp(System.currentTimeMillis());
-                    Logger.log("[" + timeStamp + "] Event " + event.getId() + " shared from "
-                            + "Vehicle " + this
-                            .getId() + " to Stationary");
-                    System.out.println("[" + timeStamp + "] Event " + event.getId() + " shared "
-                            + "from Vehicle " + this
-                            .getId() + " to Stationary");
+                    if(!this.blackHole) {
+                        connectedPoint.getCollectedEvents().add(event);
+                        Timestamp timeStamp = new Timestamp(System.currentTimeMillis());
+                        Logger.log("[" + timeStamp + "] Event " + event.getId() + " shared from "
+                                + "Vehicle " + this
+                                .getId() + " to Stationary");
+                        System.out.println("[" + timeStamp + "] Event " + event.getId() + " shared "
+                                + "from Vehicle " + this
+                                .getId() + " to Stationary");
+                    } else if(this.blackHole) {
+                        Timestamp timeStamp = new Timestamp(System.currentTimeMillis());
+                        Logger.log("[" + timeStamp + "] Event " + event.getId() + " NOT shared from "
+                                + "Vehicle " + this
+                                .getId() + " to Stationary");
+                        System.out.println("[" + timeStamp + "] Event " + event.getId() + " NOT shared "
+                                + "from Vehicle " + this
+                                .getId() + " to Stationary");
+                    }
                 }
             }
         }

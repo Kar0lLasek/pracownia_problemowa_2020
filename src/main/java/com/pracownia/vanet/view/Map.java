@@ -152,9 +152,7 @@ public class Map {
         int y = (int) (random.nextDouble() * 1000);
         Vehicle vehicle = new Vehicle(routes.get(99 % 5), fakeCarId, 40.0,
                 random.nextDouble() / 2.0 + 2);
-        EventSource eventSource = new EventSource(fakeEventId, nameEvent, "Fake Car Accident",
-                new Point(x, y), new Date(), 20.0, EventType.CAR_ACCIDENT);
-        vehicle.addFakeEvent(eventSource);
+        vehicle.setBlackHole(true);
         vehicles.add(vehicle);
         fakeCarId--;
         fakeEventId--;
