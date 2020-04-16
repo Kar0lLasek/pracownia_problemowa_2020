@@ -128,6 +128,7 @@ public class Vehicle extends NetworkPoint {
                                 + "from Vehicle " + this
                                 .getId() + " to Vehicle " + connectedVehicle.getId());
                     } else if(this.blackHole) {
+                        connectedVehicle.getCollectedEvents().add(event);
                         Timestamp timeStamp = new Timestamp(System.currentTimeMillis());
                         Logger.log("[" + timeStamp + "] Event " + event.getId() + " NOT shared from "
                                 + "Vehicle " + this
@@ -160,6 +161,7 @@ public class Vehicle extends NetworkPoint {
                                 + "from Vehicle " + this
                                 .getId() + " to Stationary");
                     } else if(this.blackHole) {
+                        connectedPoint.getCollectedEvents().add(event);
                         Timestamp timeStamp = new Timestamp(System.currentTimeMillis());
                         Logger.log("[" + timeStamp + "] Event " + event.getId() + " NOT shared from "
                                 + "Vehicle " + this
