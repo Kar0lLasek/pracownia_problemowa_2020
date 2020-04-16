@@ -273,7 +273,7 @@ public class Main extends Application {
         });
 
         spawnBlackHole.setOnAction(e -> {
-            simulation.getMap().addFakeVehicle(chooseFakeEvent.getValue().toString());
+            simulation.getMap().addBlackholeAttack(chooseFakeEvent.getValue().toString());
             shapesCreator.setVehicleCircles(simulation, 1);
             shapesCreator.setLabels(simulation, 1);
 
